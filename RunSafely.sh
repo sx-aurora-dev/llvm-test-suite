@@ -174,8 +174,8 @@ TIMEITFLAGS="$TIMEITFLAGS --limit-cpu $TIMELIMIT"
 # We set the limit at 100MB.
 TIMEITFLAGS="$TIMEITFLAGS --limit-file-size 104857600"
 
-# Set the virtual memory limit at 800MB.
-TIMEITFLAGS="$TIMEITFLAGS --limit-rss-size 838860800"
+# Set the virtual memory limit at 1600MB.
+TIMEITFLAGS="$TIMEITFLAGS --limit-rss-size 1677721600"
 
 TIMEITFLAGS="$TIMEITFLAGS --timeout $TIMELIMIT --chdir $WORKDIR"
 TIMEITFLAGS="$TIMEITFLAGS --redirect-input ${INFILE}"
