@@ -193,6 +193,13 @@ inline BENCHMARK_ALWAYS_INLINE int64_t Now() {
   asm volatile("rdcycle %0" : "=r"(cycles));
   return cycles;
 #endif
+#elif defined(__ve__) // SX Aurora VE
+  // This returns us instead of ns.  Dividing by 1000 may be required.
+  uint64_t  ret;
+  void *vehva = ((void *)0x000000001000);
+  asm volatile("lhm.l %0,0(%1)":"=r"(ret):"r"(vehva));
+  // the "800" is due to the base frequency of Tsubasa
+  return ((uint64_t)1000 * ret) / 800;
 #else
 // The soft failover to a generic implementation is automatic only for ARM.
 // For other platforms the developer is expected to make an attempt to create
