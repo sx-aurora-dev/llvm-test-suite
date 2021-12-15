@@ -1,6 +1,7 @@
 include(CheckCCompilerFlag)
 
 add_subdirectory(C++11)
+add_subdirectory(Float)
 add_subdirectory(SignlessTypes)
 add_subdirectory(Threads)
 add_subdirectory(Vector)
@@ -10,11 +11,6 @@ add_subdirectory(Vectorizer)
 if(TARGET_OS STREQUAL "Darwin")
   add_subdirectory(ObjC)
   add_subdirectory(ObjC++)
-endif()
-
-# Fortran
-if(TEST_SUITE_FORTRAN)
-  add_subdirectory(Fortran)
 endif()
 
 file(GLOB Source RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.c *.cpp)
