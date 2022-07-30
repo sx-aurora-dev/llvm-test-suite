@@ -14,9 +14,9 @@
 #
 # llvm_singlesource([PREFIX p])
 #
-#   Invokes llvm_test_executable() for each c/c++ source file.  If
-#   'sources is emptyno sources are specified, creates test executables
-#   for all C/C++ files in current directory.
+#   Invokes llvm_test_executable() for each C/C++/Fortran source file. If
+#   'sources is empty no sources are specified, creates test executables
+#   for all source files in the current directory.
 #   Passes optional PREFIX parameter to llvm_test_executable().
 #
 # llvm_multisource(target)
@@ -27,7 +27,7 @@
 include(TestSuite)
 
 # Configure the current directory as a SingleSource subdirectory - i.e. every
-# file in *.{c,cpp,cc} is treated as its own test.
+# C/C++/Fortran file is treated as its own test.
 function(llvm_singlesource)
   cmake_parse_arguments(_LSARG "" "PREFIX" "" ${ARGN})
   if(DEFINED Source)
@@ -127,6 +127,9 @@ function(llvm_test_traditional target)
     endif()
     if(FP_ABSTOLERANCE)
       set(DIFFPROG "${DIFFPROG} -a ${FP_ABSTOLERANCE}")
+    endif()
+    if(FP_IGNOREWHITESPACE)
+      set(DIFFPROG "${DIFFPROG} -i")
     endif()
     llvm_test_verify(${DIFFPROG} %o %S/${REFERENCE_OUTPUT})
     llvm_test_data(${target} ${REFERENCE_OUTPUT})
